@@ -2,6 +2,7 @@ package pl.sbandurski.todo_test.util
 
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import pl.sbandurski.todo_test.adapter.TasksAdapter
 import pl.sbandurski.todo_test.model.Task

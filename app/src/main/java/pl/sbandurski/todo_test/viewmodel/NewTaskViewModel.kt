@@ -15,17 +15,22 @@ class NewTaskViewModel: ViewModel(), Observable {
 
     private val callbacks: PropertyChangeRegistry = PropertyChangeRegistry()
 
-    private var adapter: TasksAdapter = TasksAdapter()
-    private var data : ArrayList<Task> = arrayListOf()
+    private var adapter = MutableLiveData<TasksAdapter>().default(TasksAdapter())
+    private var data = MutableLiveData<ArrayList<Task>>().default(arrayListOf())
+
+    init {
+        adapter.value = TasksAdapter()
+        data.value = arrayListOf()
+    }
 
     @Bindable
-    fun getData(): List<Task> = data
+    fun getData(): ArrayList<Task> = data.value ?: arrayListOf()
 
     @Bindable
-    fun getAdapter(): TasksAdapter = adapter
+    fun getAdapter(): TasksAdapter = adapter.value ?: TasksAdapter()
 
     fun populateRecycler() {
-        data.add(Task(name = "a", date = "2020", type = "WORK"))
+        data.value?.add(Task(name = "a", date = "2020", type = "WORK"))
         notifyPropertyChanged(BR.data)
     }
 
@@ -41,5 +46,6 @@ class NewTaskViewModel: ViewModel(), Observable {
         callbacks.notifyCallbacks(this, fieldId, null)
     }
 
+    fun<T: Any?> MutableLiveData<T>.default(initialValue: T) = apply { value = initialValue }
 
 }
