@@ -20,9 +20,10 @@ class TasksActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    viewModel = NewTaskViewModel()
+    viewModel = ViewModelProviders.of(this).get(NewTaskViewModel::class.java)
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     binding.viewModel = viewModel
+    binding.lifecycleOwner = this
     setupRecyclerView()
 
   }

@@ -21,8 +21,15 @@
         tools:listitem="@layout/item_task"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:adapter="@{viewModel.adapter}"
-        app:data="@{viewModel.data}"
-        />
+        app:data="@{viewModel.data}" />
+
+    <Button
+        android:id="@+id/main_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CLICK"
+        android:onClick="@{() -> viewModel.populateRecycler()}"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
